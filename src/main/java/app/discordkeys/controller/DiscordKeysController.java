@@ -1,13 +1,17 @@
 package app.discordkeys.controller;
 
+import app.discordkeys.GlobalKeyListener;
+import app.discordkeys.JDAInstance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
+import javafx.scene.paint.Color;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import javax.security.auth.login.LoginException;
 import java.net.URL;
@@ -19,7 +23,13 @@ import java.util.ResourceBundle;
 public class DiscordKeysController implements Initializable {
 
     @FXML
-    TextField token;
+    private TextField token;
+
+    @FXML
+    private Button login;
+
+    @FXML
+    private Label status;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -27,15 +37,20 @@ public class DiscordKeysController implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        JDA jda;
         try {
-            jda = new JDABuilder(AccountType.CLIENT)
-                    .setToken(token.getText())
-                    .setAutoReconnect(true)
-                    .buildBlocking();
-            System.out.println(jda.asClient().getFriends());
+            token.setDisable(true);
+            login.setDisable(true);
+            JDAInstance.login(token.getText());
+            status.setText("Connected to Discord");
+            status.setTextFill(Color.GREEN);
+            GlobalScreen.registerNativeHook();
+            GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
         } catch (LoginException | InterruptedException | RateLimitedException e) {
-            e.printStackTrace();
+            System.out.println("Failed to login");
+            token.setDisable(false);
+            login.setDisable(false);
+        } catch (NativeHookException e) {
+            System.out.println("Failed to register native hook");
         }
     }
 }
