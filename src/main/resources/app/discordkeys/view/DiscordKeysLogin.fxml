@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
+<BorderPane prefHeight="349.8" prefWidth="358.8" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.discordkeys.controller.DiscordKeysController">
+    <padding>
+        <Insets bottom="10" />
+    </padding>
+    <bottom>
+        <VBox spacing="10" alignment="CENTER">
+            <HBox spacing="10" alignment="BASELINE_CENTER">
+                <Label text="Token" />
+                <TextField fx:id="token" />
+                <Button fx:id="login" mnemonicParsing="false" onAction="#login" text="Set" />
+            </HBox>
+            <Label fx:id="status" text="Disconnected from Discord" textFill="crimson" />
+        </VBox>
+   </bottom>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.8" prefWidth="358.8" spacing="10" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.discordkeys.controller.DiscordKeysController">
-    <HBox alignment="BASELINE_CENTER" spacing="10">
-       <padding>
-           <Insets bottom="5" top="15" />
-       </padding>
-
-       <Label text="Token" />
-       <TextField fx:id="token" />
-       <Button fx:id="login" mnemonicParsing="false" onAction="#login" text="Set" />
-    </HBox>
-    <HBox alignment="BASELINE_CENTER">
-        <Label fx:id="status" text="Disconnected from Discord" textFill="crimson" />
-    </HBox>
-</VBox>
+</BorderPane>

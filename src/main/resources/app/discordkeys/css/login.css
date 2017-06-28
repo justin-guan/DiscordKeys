@@ -1,4 +1,4 @@
-VBox {
+BorderPane {
     -fx-background-image: url("../img/login_background.png") no-repeat center;
     -fx-background-size: 100% 100%;
 }
