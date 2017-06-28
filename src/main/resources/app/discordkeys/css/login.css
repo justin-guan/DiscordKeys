@@ -1,0 +1,4 @@
+VBox {
+    -fx-background-image: url("../img/login_background.png");
+    -fx-background-size: 100% 100%;
+}
