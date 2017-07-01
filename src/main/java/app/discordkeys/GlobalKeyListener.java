@@ -17,7 +17,6 @@ public class GlobalKeyListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-        //System.out.println("Key Released: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()))
         boolean isCtrlPressed = (nativeKeyEvent.getModifiers() & NativeKeyEvent.CTRL_MASK) != 0;
 
         if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_F1 && isCtrlPressed) {
@@ -55,5 +54,9 @@ public class GlobalKeyListener implements NativeKeyListener {
                 }
             }
         }
+    }
+
+    public void addNewShortcut(String shortcut, String command, String server, String channel) {
+
     }
 }

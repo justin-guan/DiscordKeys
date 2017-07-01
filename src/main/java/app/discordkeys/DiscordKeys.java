@@ -27,15 +27,15 @@ public class DiscordKeys extends Application {
 
     @Override
     public void stop() {
-        JDA jda = JDAInstance.getJda();
-        if (jda != null) {
-            JDAInstance.getJda().shutdown(true);
-        }
-
-        try {
-            GlobalScreen.unregisterNativeHook();
-        } catch (NativeHookException e) {
-            System.exit(1);
-        }
+//        JDA jda = JDAInstance.getJda();
+//        if (jda != null) {
+//            JDAInstance.getJda().shutdown(true);
+//        }
+//
+//        try {
+//            GlobalScreen.unregisterNativeHook();
+//        } catch (NativeHookException e) {
+//            System.exit(1);
+//        }
     }
 }

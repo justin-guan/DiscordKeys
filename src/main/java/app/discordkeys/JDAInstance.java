@@ -21,7 +21,7 @@ public class JDAInstance {
                 .buildBlocking();
     }
 
-    static JDA getJda() {
+    public static JDA getJda() {
         return jda;
     }
 
