@@ -55,6 +55,7 @@ public class DiscordKeysLoginController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setOnCloseRequest(event -> Platform.runLater(this::cleanUp));
             stage.show();
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         } catch (LoginException e) {
             status.setText("Failed to Login: Login Failure");
         } catch (InterruptedException e) {
@@ -64,8 +65,6 @@ public class DiscordKeysLoginController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 
     private void cleanUp() {
@@ -74,10 +73,6 @@ public class DiscordKeysLoginController implements Initializable {
             JDAInstance.getJda().shutdown(true);
         }
 
-//        try {
-//            GlobalScreen.unregisterNativeHook();
-//        } catch (NativeHookException e) {
-//            System.exit(1);
-//        }
+        System.exit(0);
     }
 }

@@ -2,9 +2,12 @@ package app.discordkeys.controller;
 
 import app.discordkeys.GlobalKeyListener;
 import app.discordkeys.JDAInstance;
+import app.discordkeys.Keybind;
+import app.discordkeys.Shortcut;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,9 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+import org.jnativehook.SwingDispatchService;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -25,7 +31,11 @@ import java.util.ResourceBundle;
 public class DiscordKeysHotkeyBinder implements Initializable {
 
     @FXML
+    private TableView<Keybind> commandTable;
+    @FXML
     private ToggleButton newShortcut;
+    @FXML
+    private TextField command;
     @FXML
     public ComboBox<Guild> servers;
     @FXML
@@ -54,12 +64,13 @@ public class DiscordKeysHotkeyBinder implements Initializable {
             updateChannels();
         });
 
-//        try {
-//            GlobalScreen.registerNativeHook();
-//            GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
-//        } catch (NativeHookException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            GlobalScreen.setEventDispatcher(new SwingDispatchService());
+            GlobalScreen.registerNativeHook();
+            GlobalScreen.addNativeKeyListener(globalKeyListener);
+        } catch (NativeHookException e) {
+            e.printStackTrace();
+        }
     }
 
     public void registerHotkey(ActionEvent actionEvent) {
@@ -94,5 +105,14 @@ public class DiscordKeysHotkeyBinder implements Initializable {
                 }
             }
         });
+    }
+
+    public void addNewShortcut(ActionEvent actionEvent) {
+        ObservableList<Keybind> data = commandTable.getItems();
+        Shortcut s = new Shortcut(newShortcut.getText(), command.getText(), servers.getValue(), channels.getValue());
+        Keybind k = new Keybind(s.getShortcut(), s.getCommand(), s.getServer(), s.getChannel());
+
+        data.add(k);
+        globalKeyListener.addNewShortcut(s);
     }
 }
