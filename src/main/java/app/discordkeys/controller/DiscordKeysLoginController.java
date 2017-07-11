@@ -47,12 +47,12 @@ public class DiscordKeysLoginController implements Initializable {
             GlobalScreen.addNativeKeyListener(new NativeKeyListener() {
                 @Override
                 public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-                    System.out.println("Pressed: " + nativeKeyEvent.getKeyCode());
+                    System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
                 }
 
                 @Override
                 public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-                    System.out.println("Released: " + nativeKeyEvent.getKeyCode());
+                    System.out.println("Key Released: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
                     if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
                         try {
                             System.out.println("ESCAPE detected, removing hook");
