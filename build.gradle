@@ -24,7 +24,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'net.dv8tion:JDA:3.1.1_215'
-    compile 'com.1stleg:jnativehook:2.0.2'
+    compile group: 'com.1stleg', name: 'jnativehook', version: '2.1.0'
 }
 
 apply plugin: 'javafx-gradle-plugin'

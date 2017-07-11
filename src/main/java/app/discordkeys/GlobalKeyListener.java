@@ -8,9 +8,9 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import java.awt.*;
-import java.util.HashMap;
+
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by justin on 6/23/17.
@@ -23,22 +23,22 @@ public class GlobalKeyListener implements NativeKeyListener {
     public GlobalKeyListener() {
         shortcuts = new HashSet<>();
         pressedKeys = new HashSet<>();
+        System.out.println("Global Key Listener added");
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         pressedKeys.add(nativeKeyEvent.getKeyCode());
-//        for (Shortcut s : shortcuts) {
-//            for (KeyCode k : s.getShortcut()) {
-//                if (pressedKeys.contains(k)) {
-//
-//                }
-//            }
-//        }
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
+        System.out.println(pressedKeys.toString());
+        for (Shortcut s : shortcuts) {
+            if (pressedKeys.containsAll(s.getShortcutAsNativeKeyEventList())) {
+                System.out.println(s.getCommand());
+            }
+        }
         pressedKeys.remove(nativeKeyEvent.getKeyCode());
 //        boolean isCtrlPressed = (nativeKeyEvent.getModifiers() & NativeKeyEvent.CTRL_MASK) != 0;
 //

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.objects.Global;
 import net.dv8tion.jda.core.JDA;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -27,6 +28,11 @@ public class DiscordKeys extends Application {
 
     @Override
     public void stop() {
-        System.exit(0);
+        try {
+            System.out.println("Attempting to unregister native hook");
+            GlobalScreen.unregisterNativeHook();
+        } catch (NativeHookException e) {
+            System.exit(1);
+        }
     }
 }

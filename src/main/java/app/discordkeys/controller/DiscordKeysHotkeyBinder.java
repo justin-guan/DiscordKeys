@@ -4,8 +4,6 @@ import app.discordkeys.GlobalKeyListener;
 import app.discordkeys.JDAInstance;
 import app.discordkeys.Keybind;
 import app.discordkeys.Shortcut;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,12 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.util.Callback;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.jnativehook.SwingDispatchService;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -65,7 +61,6 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         });
 
         try {
-            GlobalScreen.setEventDispatcher(new SwingDispatchService());
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeKeyListener(globalKeyListener);
         } catch (NativeHookException e) {
