@@ -1,5 +1,6 @@
 package app.discordkeys;
 
+import javafx.beans.property.SimpleStringProperty;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -18,12 +19,54 @@ public class Shortcut {
     private Guild server;
     private TextChannel channel;
 
+    private final SimpleStringProperty keybindProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty commandProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty serverProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty channelProperty = new SimpleStringProperty("");
+
     public Shortcut(String shortcut, String command, Guild server, TextChannel channel) {
+        this.keybindProperty.set(shortcut);
+        this.commandProperty.set(command);
+        this.serverProperty.set(server.getName());
+        this.channelProperty.set(channel.getName());
+
         this.shortcut = shortcut;
         this.command = command;
         this.server = server;
         this.channel = channel;
         this.shortcutList = toNativeKeyList(shortcut);
+    }
+
+    public String getKeybindProperty() {
+        return keybindProperty.get();
+    }
+
+    public void setKeybindProperty(String fKeybind) {
+        this.keybindProperty.set(fKeybind);
+    }
+
+    public String getCommandProperty() {
+        return commandProperty.get();
+    }
+
+    public void setCommandProperty(String fCommand) {
+        this.commandProperty.set(fCommand);
+    }
+
+    public String getServerProperty() {
+        return serverProperty.get();
+    }
+
+    public void setServerProperty(String fServer) {
+        this.serverProperty.set(fServer);
+    }
+
+    public String getChannelProperty() {
+        return channelProperty.get();
+    }
+
+    public void setChannelProperty(String fChannel) {
+        this.channelProperty.set(fChannel);
     }
 
     public String getShortcut() {

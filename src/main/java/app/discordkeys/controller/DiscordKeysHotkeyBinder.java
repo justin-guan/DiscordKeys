@@ -2,7 +2,6 @@ package app.discordkeys.controller;
 
 import app.discordkeys.GlobalKeyListener;
 import app.discordkeys.JDAInstance;
-import app.discordkeys.Keybind;
 import app.discordkeys.Shortcut;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +25,7 @@ import java.util.ResourceBundle;
 public class DiscordKeysHotkeyBinder implements Initializable {
 
     @FXML
-    private TableView<Keybind> commandTable;
+    private TableView<Shortcut> commandTable;
     @FXML
     private ToggleButton newShortcut;
     @FXML
@@ -97,11 +96,10 @@ public class DiscordKeysHotkeyBinder implements Initializable {
     }
 
     public void addNewShortcut(ActionEvent actionEvent) {
-        ObservableList<Keybind> data = commandTable.getItems();
+        ObservableList<Shortcut> data = commandTable.getItems();
         Shortcut s = new Shortcut(newShortcut.getText(), command.getText(), servers.getValue(), channels.getValue());
-        Keybind k = new Keybind(s.getShortcut(), s.getCommand(), s.getServer(), s.getChannel());
 
-        data.add(k);
+        data.add(s);
         globalKeyListener.addNewShortcut(s);
     }
 }

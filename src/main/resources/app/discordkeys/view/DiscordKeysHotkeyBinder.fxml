@@ -16,22 +16,22 @@
                 <columns>
                     <TableColumn text="Keybind">
                         <cellValueFactory>
-                            <PropertyValueFactory property="keybind" />
+                            <PropertyValueFactory property="keybindProperty" />
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Command">
                         <cellValueFactory>
-                            <PropertyValueFactory property="command" />
+                            <PropertyValueFactory property="commandProperty" />
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Server">
                         <cellValueFactory>
-                            <PropertyValueFactory property="server" />
+                            <PropertyValueFactory property="serverProperty" />
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Channel">
                         <cellValueFactory>
-                            <PropertyValueFactory property="channel" />
+                            <PropertyValueFactory property="channelProperty" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
