@@ -1,8 +1,6 @@
 package app.discordkeys;
 
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -16,6 +14,9 @@ import java.util.List;
 public class State {
 
     public static void saveKeybinds(GlobalKeyListener globalKeyListener) throws IOException {
+        File settingsDirectory = new File("settings");
+        settingsDirectory.mkdirs();
+
         ObjectMapper mapper = new ObjectMapper();
         String userID = JDAInstance.getJda().getSelfUser().getId();
         List<Keybind> keybinds = new ArrayList<>();
@@ -25,14 +26,17 @@ public class State {
             keybinds.add(k);
         }
 
-        mapper.writeValue(new File(userID + ".json"), keybinds);
+        mapper.writeValue(new File("settings/" + userID + ".json"), keybinds);
     }
 
     public static GlobalKeyListener loadKeybinds() throws IOException {
+        File settingsDirectory = new File("settings");
+        settingsDirectory.mkdirs();
+
         ObjectMapper mapper = new ObjectMapper();
         String userID = JDAInstance.getJda().getSelfUser().getId();
 
-        Keybind[] keybinds = mapper.readValue(new File(userID + ".json"), Keybind[].class);
+        Keybind[] keybinds = mapper.readValue(new File("settings/" + userID + ".json"), Keybind[].class);
 
         GlobalKeyListener globalKeyListener = new GlobalKeyListener();
         for (Keybind k : keybinds) {
