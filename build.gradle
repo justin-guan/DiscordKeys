@@ -30,9 +30,9 @@ dependencies {
 apply plugin: 'javafx-gradle-plugin'
 
 jfx {
-    // Minimal requirement for jfxJar-task
+    verbose = true
+    jfxAppOutputDir = "build/jfx/app"
+    jfxMainAppJarName = "DiscordKeys-${version}.jar"
     mainClass = 'app.discordkeys.DiscordKeys'
-
-    // Minimal requirement for jfxNative-task
     vendor = 'Justin Guan'
 }
