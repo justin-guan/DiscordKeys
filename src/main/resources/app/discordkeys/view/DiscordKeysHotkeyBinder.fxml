@@ -42,6 +42,7 @@
                 <ComboBox fx:id="servers" prefHeight="25.0" prefWidth="100.0" />
                 <ComboBox fx:id="channels" prefHeight="25.0" prefWidth="100.0" />
                 <Button text="Add" onAction="#addNewShortcut" />
+                <Button text="Remove" onAction="#removeShortcut" />
             </HBox>
         </VBox>
     </center>

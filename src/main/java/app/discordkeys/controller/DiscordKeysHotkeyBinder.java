@@ -102,4 +102,10 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         data.add(s);
         globalKeyListener.addNewShortcut(s);
     }
+
+    public void removeShortcut(ActionEvent actionEvent) {
+        Shortcut s = commandTable.getSelectionModel().getSelectedItem();
+        commandTable.getItems().remove(s);
+        globalKeyListener.removeShortcut(s);
+    }
 }

@@ -53,4 +53,8 @@ public class GlobalKeyListener implements NativeKeyListener {
     public void addNewShortcut(Shortcut shortcut) {
         shortcuts.add(shortcut);
     }
+
+    public void removeShortcut(Shortcut shortcut) {
+        shortcuts.remove(shortcut);
+    }
 }
