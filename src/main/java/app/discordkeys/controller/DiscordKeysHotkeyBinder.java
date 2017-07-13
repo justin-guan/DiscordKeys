@@ -1,8 +1,6 @@
 package app.discordkeys.controller;
 
-import app.discordkeys.GlobalKeyListener;
-import app.discordkeys.JDAInstance;
-import app.discordkeys.Shortcut;
+import app.discordkeys.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +12,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.GlobalScreen;
 
+import java.io.*;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
@@ -100,12 +99,25 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         Shortcut s = new Shortcut(newShortcut.getText(), command.getText(), servers.getValue(), channels.getValue());
 
         data.add(s);
-        globalKeyListener.addNewShortcut(s);
+        globalKeyListener.addShortcut(s);
+
+        try {
+            State.save(globalKeyListener, "keybinds.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeShortcut(ActionEvent actionEvent) {
         Shortcut s = commandTable.getSelectionModel().getSelectedItem();
         commandTable.getItems().remove(s);
         globalKeyListener.removeShortcut(s);
+
+        try {
+            State.save(globalKeyListener, "keybinds.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }

@@ -50,11 +50,20 @@ public class GlobalKeyListener implements NativeKeyListener {
         t.sendMessage(msg).queue();
     }
 
-    public void addNewShortcut(Shortcut shortcut) {
+    public void addShortcut(Shortcut shortcut) {
         shortcuts.add(shortcut);
     }
 
     public void removeShortcut(Shortcut shortcut) {
         shortcuts.remove(shortcut);
     }
+
+    public HashSet<Shortcut> getShortcuts() {
+        return shortcuts;
+    }
+
+    public void setShortcuts(HashSet<Shortcut> shortcuts) {
+        this.shortcuts = shortcuts;
+    }
+
 }

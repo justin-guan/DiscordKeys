@@ -1,5 +1,6 @@
 package app.discordkeys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.beans.property.SimpleStringProperty;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -13,10 +14,15 @@ import java.util.List;
  */
 public class Shortcut {
 
+    @JsonIgnore
     private List<Integer> shortcutList;
+    @JsonIgnore
     private String shortcut;
+    @JsonIgnore
     private String command;
+    @JsonIgnore
     private Guild server;
+    @JsonIgnore
     private TextChannel channel;
 
     private final SimpleStringProperty keybindProperty = new SimpleStringProperty("");
@@ -73,6 +79,7 @@ public class Shortcut {
         return shortcut;
     }
 
+    @JsonIgnore
     public List<Integer> getShortcutAsNativeKeyEventList() {
         return shortcutList;
     }
