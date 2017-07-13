@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -27,10 +28,13 @@ import java.util.ResourceBundle;
 public class DiscordKeysLoginController implements Initializable {
 
     @FXML
-    private TextField token;
+    private TextField textFieldToken;
 
     @FXML
-    private Label status;
+    private Label labelStatus;
+
+    @FXML
+    private Button buttonLogin;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,9 +43,11 @@ public class DiscordKeysLoginController implements Initializable {
 
     public void login(ActionEvent actionEvent) {
         try {
-            JDAInstance.login(token.getText());
-            status.setText("Connected to Discord");
-            status.setTextFill(Color.GREEN);
+            JDAInstance.login(textFieldToken.getText());
+            labelStatus.setText("Connected to Discord");
+            labelStatus.setTextFill(Color.GREEN);
+            textFieldToken.setDisable(true);
+            buttonLogin.setDisable(true);
 
             Parent root = FXMLLoader.load(getClass().getResource("/app/discordkeys/view/DiscordKeysHotkeyBinder.fxml"));
             Stage stage = new Stage();
@@ -51,11 +57,11 @@ public class DiscordKeysLoginController implements Initializable {
             stage.show();
             ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         } catch (LoginException e) {
-            status.setText("Failed to Login: Login Failure");
+            labelStatus.setText("Failed to Login: Login Failure");
         } catch (InterruptedException e) {
-            status.setText("Failed to Login: Login Interrupted");
+            labelStatus.setText("Failed to Login: Login Interrupted");
         } catch (RateLimitedException e) {
-            status.setText("Failed to Login: Rate Limited");
+            labelStatus.setText("Failed to Login: Rate Limited");
         } catch (IOException e) {
             e.printStackTrace();
         }
