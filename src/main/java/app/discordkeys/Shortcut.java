@@ -14,21 +14,30 @@ import java.util.List;
  */
 public class Shortcut {
 
-    @JsonIgnore
     private List<Integer> shortcutList;
-    @JsonIgnore
     private String shortcut;
-    @JsonIgnore
     private String command;
-    @JsonIgnore
     private Guild server;
-    @JsonIgnore
     private TextChannel channel;
 
     private final SimpleStringProperty keybindProperty = new SimpleStringProperty("");
     private final SimpleStringProperty commandProperty = new SimpleStringProperty("");
     private final SimpleStringProperty serverProperty = new SimpleStringProperty("");
     private final SimpleStringProperty channelProperty = new SimpleStringProperty("");
+
+    public Shortcut(Keybind k) {
+        this.keybindProperty.set(k.getKeyCombination());
+        this.commandProperty.set(k.getCommand());
+        this.shortcut = k.getKeyCombination();
+        this.command = k.getCommand();
+        this.shortcutList = toNativeKeyList(shortcut);
+
+        this.server = JDAInstance.getJda().getGuildById(k.getServerID());
+        this.channel = JDAInstance.getJda().getTextChannelById(k.getChannelID());
+
+        this.serverProperty.set(server.getName());
+        this.channelProperty.set(channel.getName());
+    }
 
     public Shortcut(String shortcut, String command, Guild server, TextChannel channel) {
         this.keybindProperty.set(shortcut);

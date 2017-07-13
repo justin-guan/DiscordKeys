@@ -40,7 +40,6 @@ public class DiscordKeysHotkeyBinder implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pressedKeys = new HashSet<>();
-        globalKeyListener = new GlobalKeyListener();
 
         List<Guild> guilds = JDAInstance.getJda().getGuilds();
         servers.setItems(FXCollections.observableArrayList(guilds));
@@ -56,6 +55,14 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         servers.valueProperty().addListener((observable, oldValue, newValue) -> {
             updateChannels();
         });
+
+        try {
+            globalKeyListener = State.loadKeybinds();
+        } catch (IOException e) {
+            globalKeyListener = new GlobalKeyListener();
+        }
+
+        commandTable.getItems().addAll(globalKeyListener.getShortcuts());
 
         GlobalScreen.addNativeKeyListener(globalKeyListener);
     }
@@ -102,7 +109,7 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         globalKeyListener.addShortcut(s);
 
         try {
-            State.save(globalKeyListener, "keybinds.json");
+            State.saveKeybinds(globalKeyListener);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,7 +121,7 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         globalKeyListener.removeShortcut(s);
 
         try {
-            State.save(globalKeyListener, "keybinds.json");
+            State.saveKeybinds(globalKeyListener);
         } catch (IOException e) {
             e.printStackTrace();
         }
