@@ -1,13 +1,9 @@
 package app.discordkeys;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.input.KeyCode;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.keyboard.NativeKeyEvent;
 
-import javax.print.attribute.standard.MediaSize;
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 

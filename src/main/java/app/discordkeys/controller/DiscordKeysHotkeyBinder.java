@@ -14,7 +14,6 @@ import javafx.scene.input.KeyCode;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
 
 import java.net.URL;
 import java.util.HashSet;

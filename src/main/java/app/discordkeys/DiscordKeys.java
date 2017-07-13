@@ -1,17 +1,12 @@
 package app.discordkeys;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.objects.Global;
-import net.dv8tion.jda.core.JDA;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
