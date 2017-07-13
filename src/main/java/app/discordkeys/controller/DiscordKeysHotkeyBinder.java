@@ -60,12 +60,7 @@ public class DiscordKeysHotkeyBinder implements Initializable {
             updateChannels();
         });
 
-        try {
-            GlobalScreen.registerNativeHook();
-            GlobalScreen.addNativeKeyListener(globalKeyListener);
-        } catch (NativeHookException e) {
-            e.printStackTrace();
-        }
+        GlobalScreen.addNativeKeyListener(globalKeyListener);
     }
 
     public void registerHotkey(ActionEvent actionEvent) {

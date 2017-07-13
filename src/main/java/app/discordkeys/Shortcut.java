@@ -72,13 +72,13 @@ public class Shortcut {
         for (String key : s) {
             switch (key) {
                 case "CONTROL":
-                    list.add(NativeKeyEvent.CTRL_MASK);
+                    list.add(NativeKeyEvent.VC_CONTROL);
                     break;
                 case "SHIFT":
-                    list.add(NativeKeyEvent.SHIFT_MASK);
+                    list.add(NativeKeyEvent.VC_SHIFT);
                     break;
                 case "ALT":
-                    list.add(NativeKeyEvent.ALT_MASK);
+                    list.add(NativeKeyEvent.VC_ALT);
                     break;
                 case "F1":
                     list.add(NativeKeyEvent.VC_F1);
@@ -252,7 +252,7 @@ public class Shortcut {
                     list.add(NativeKeyEvent.VC_SPACE);
                     break;
                 case "WINDOWS":
-                    list.add(NativeKeyEvent.META_MASK);
+                    list.add(NativeKeyEvent.VC_META);
                     break;
                 case "CAPS":
                     list.add(NativeKeyEvent.VC_CAPS_LOCK);

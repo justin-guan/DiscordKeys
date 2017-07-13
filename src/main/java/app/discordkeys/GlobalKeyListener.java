@@ -1,5 +1,6 @@
 package app.discordkeys;
 
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import net.dv8tion.jda.core.JDA;
@@ -23,23 +24,27 @@ public class GlobalKeyListener implements NativeKeyListener {
     public GlobalKeyListener() {
         shortcuts = new HashSet<>();
         pressedKeys = new HashSet<>();
-        System.out.println("Global Key Listener added");
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-        pressedKeys.add(nativeKeyEvent.getKeyCode());
+        Platform.runLater(() -> {
+            pressedKeys.add(nativeKeyEvent.getKeyCode());
+        });
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-        System.out.println(pressedKeys.toString());
-        for (Shortcut s : shortcuts) {
-            if (pressedKeys.containsAll(s.getShortcutAsNativeKeyEventList())) {
-                System.out.println(s.getCommand());
+        Platform.runLater(() -> {
+            System.out.println("Pressed keys: " + pressedKeys.toString());
+            for (Shortcut s : shortcuts) {
+                System.out.println("Shortcuts: " + s.getShortcutAsNativeKeyEventList());
+                if (pressedKeys.containsAll(s.getShortcutAsNativeKeyEventList())) {
+                    System.out.println(s.getCommand());
+                }
             }
-        }
-        pressedKeys.remove(nativeKeyEvent.getKeyCode());
+            pressedKeys.remove(nativeKeyEvent.getKeyCode());
+        });
 //        boolean isCtrlPressed = (nativeKeyEvent.getModifiers() & NativeKeyEvent.CTRL_MASK) != 0;
 //
 //        if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_F1 && isCtrlPressed) {
