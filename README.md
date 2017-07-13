@@ -1,5 +1,5 @@
 # DiscordKeys
-DiscordKeys is a hotkey application for Discord bots. It's purpose is to allow hotkey combinations to send messages to a channel. These messages can invoke commands.
+DiscordKeys is a hotkey application for Discord bots. It's purpose is to allow hotkey combinations to send messages to a channel. These messages can invoke commands or simply send prerecorded messages with a hotkey combination.
 
 ## Running DiscordKeys
 ### Finding the User Token
