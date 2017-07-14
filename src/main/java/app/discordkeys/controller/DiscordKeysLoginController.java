@@ -1,7 +1,6 @@
 package app.discordkeys.controller;
 
 import app.discordkeys.JDAInstance;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,18 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
-import javax.crypto.SecretKey;
 import javax.security.auth.login.LoginException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 

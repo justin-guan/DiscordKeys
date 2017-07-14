@@ -59,5 +59,5 @@ public class GlobalKeyListener implements NativeKeyListener {
     public HashSet<Shortcut> getShortcuts() {
         return shortcuts;
     }
-    
+
 }

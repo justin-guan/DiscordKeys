@@ -1,13 +1,15 @@
 package app.discordkeys.controller;
 
-import app.discordkeys.*;
+import app.discordkeys.GlobalKeyListener;
+import app.discordkeys.JDAInstance;
+import app.discordkeys.Shortcut;
+import app.discordkeys.State;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,7 +21,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
