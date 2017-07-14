@@ -17,10 +17,17 @@ import javafx.stage.Stage;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
+import javax.crypto.SecretKey;
 import javax.security.auth.login.LoginException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 /**
  * Created by justin on 6/22/17.
@@ -36,43 +43,58 @@ public class DiscordKeysLoginController implements Initializable {
     @FXML
     private Button buttonLogin;
 
+    private Preferences preferences;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        preferences = Preferences.userRoot().node("DiscordKeys");
     }
 
     public void login(ActionEvent actionEvent) {
         try {
-            JDAInstance.login(textFieldToken.getText());
-            labelStatus.setText("Connected to Discord");
-            labelStatus.setTextFill(Color.GREEN);
-            textFieldToken.setDisable(true);
-            buttonLogin.setDisable(true);
+            attemptLogin(textFieldToken.getText());
+            preferences.put("Discord Key", textFieldToken.getText());
+            loadKeyBinder();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/app/discordkeys/view/DiscordKeysHotkeyBinder.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("DiscordKeys Hotkey Binder");
-            stage.setScene(new Scene(root));
-            stage.setOnCloseRequest(event -> Platform.runLater(this::cleanUp));
-            stage.show();
             ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         } catch (LoginException e) {
             labelStatus.setText("Failed to Login: Login Failure");
+            setDisconnectedStatus();
         } catch (InterruptedException e) {
             labelStatus.setText("Failed to Login: Login Interrupted");
+            setDisconnectedStatus();
         } catch (RateLimitedException e) {
             labelStatus.setText("Failed to Login: Rate Limited");
+            setDisconnectedStatus();
         } catch (IOException e) {
-            e.printStackTrace();
+            labelStatus.setText("Unknown error");
         }
     }
 
-    private void cleanUp() {
-        JDA jda = JDAInstance.getJda();
-        if (jda != null) {
-            JDAInstance.getJda().shutdown(true);
-        }
+    private void attemptLogin(String token) throws LoginException, InterruptedException, RateLimitedException {
+        JDAInstance.login(token);
+        setConnectedStatus();
+    }
 
-        System.exit(0);
+    private void setConnectedStatus() {
+        labelStatus.setText("Connected to Discord");
+        labelStatus.setTextFill(Color.GREEN);
+        textFieldToken.setDisable(true);
+        buttonLogin.setDisable(true);
+    }
+
+    private void setDisconnectedStatus() {
+        labelStatus.setText("Disconnected from Discord");
+        labelStatus.setTextFill(Color.CRIMSON);
+        textFieldToken.setDisable(false);
+        buttonLogin.setDisable(false);
+    }
+
+    private void loadKeyBinder() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/app/discordkeys/view/DiscordKeysHotkeyBinder.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("DiscordKeys Hotkey Binder");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
