@@ -30,9 +30,7 @@ public class GlobalKeyListener implements NativeKeyListener {
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
         Platform.runLater(() -> {
-            System.out.println("Pressed keys: " + pressedKeys.toString());
             for (Shortcut s : shortcuts) {
-                System.out.println("Shortcuts: " + s.getShortcutAsNativeKeyEventList());
                 if (pressedKeys.containsAll(s.getShortcutAsNativeKeyEventList())) {
                     sendDiscordMessage(s.getChannel(), s.getCommand());
                 }
@@ -43,7 +41,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
-        //System.out.println("Key Typed: " + nativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
+        // Do nothing
     }
 
     private void sendDiscordMessage(TextChannel t, String msg) {
@@ -61,9 +59,5 @@ public class GlobalKeyListener implements NativeKeyListener {
     public HashSet<Shortcut> getShortcuts() {
         return shortcuts;
     }
-
-    public void setShortcuts(HashSet<Shortcut> shortcuts) {
-        this.shortcuts = shortcuts;
-    }
-
+    
 }

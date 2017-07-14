@@ -5,18 +5,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import java.io.*;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 /**
  * Created by justin on 6/28/17.
@@ -127,4 +135,31 @@ public class DiscordKeysHotkeyBinder implements Initializable {
         }
     }
 
+    public void logout(ActionEvent actionEvent) {
+        JDA jda = JDAInstance.getJda();
+        if (jda != null) {
+            JDAInstance.getJda().shutdownNow();
+        }
+
+        GlobalScreen.removeNativeKeyListener(globalKeyListener);
+        try {
+            GlobalScreen.registerNativeHook();
+        } catch (NativeHookException e) {
+            System.exit(1);
+        }
+        Preferences preferences = Preferences.userRoot().node("DiscordKeys");
+        preferences.remove("Discord Key");
+
+        commandTable.getScene().getWindow().hide();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/app/discordkeys/view/DiscordKeysLogin.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("DiscordKeys");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.exit(1);
+        }
+    }
 }

@@ -8,10 +8,24 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <BorderPane prefHeight="400.0" prefWidth="700.0" stylesheets="@../css/hotkey.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.discordkeys.controller.DiscordKeysHotkeyBinder">
     <padding>
-        <Insets top="10" left="10" right="10" bottom="10" />
+        <Insets bottom="10" />
     </padding>
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Logout" onAction="#logout" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
     <center>
         <VBox spacing="10">
+            <BorderPane.margin>
+                <Insets left="10" right="10" top="10" />
+            </BorderPane.margin>
             <TableView fx:id="commandTable">
                 <columns>
                     <TableColumn text="Keybind">

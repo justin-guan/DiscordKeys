@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'net.dv8tion:JDA:3.1.1_215'
+    compile 'net.dv8tion:JDA:3.1.1_222'
     compile group: 'com.1stleg', name: 'jnativehook', version: '2.1.0'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.9'
 }

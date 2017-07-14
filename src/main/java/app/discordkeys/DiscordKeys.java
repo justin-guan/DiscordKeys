@@ -55,7 +55,7 @@ public class DiscordKeys extends Application {
     public void stop() {
         JDA jda = JDAInstance.getJda();
         if (jda != null) {
-            JDAInstance.getJda().shutdown(true);
+            JDAInstance.getJda().shutdownNow();
         }
 
         System.exit(0); // Force unregister native hook
