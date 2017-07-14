@@ -1,4 +1,4 @@
-version '1.0-ALPHA'
+version '1.0-BETA'
 
 buildscript {
     dependencies {
